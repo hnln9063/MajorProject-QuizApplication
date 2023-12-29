@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Final Report</title>
+</head>
+<style>
+        /* CSS Styles for your page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+<body>
+    <h1>Final Report</h1>
+    <table border="1">
+        <tr>
+            <th>Roll Number</th>
+            <th th:each="field : ${fields}">[[${field}]]</th>
+        </tr>
+        <tr th:each="result : ${res}">
+            <td th:text="${result.rollnumber}"></td>
+            <td th:each="field : ${fields}" th:text="${result[field]}"></td>
+        </tr>
+    </table>
+</body>
+<script>
+        // JavaScript code for interactivity
+        // Function to highlight rows on hover
+        const tableRows = document.querySelectorAll('tr');
+        tableRows.forEach((row, index) => {
+            row.addEventListener('mouseover', () => {
+                if (index % 2 === 0) {
+                    row.style.backgroundColor = '#ddd'; // Highlight even rows
+                } else {
+                    row.style.backgroundColor = '#ccc'; // Highlight odd rows
+                }
+            });
+            row.addEventListener('mouseout', () => {
+                row.style.backgroundColor = ''; // Reset the background color on mouseout
+            });
+        });
+    </script>
+</html>

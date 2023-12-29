@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin-top: 25px;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #page-container {
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 500px;
+            box-sizing: border-box;
+            margin-bottom: auto;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        .form-input.question {
+            padding: 10px;
+            word-wrap: break-word;
+        }
+
+        .form-button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .form-button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .form-input:focus {
+            border: 2px solid #007bff !important;
+        }
+
+        .form-button.add,
+        .form-button.back {
+            background-color: transparent;
+            color: black;
+        }
+
+        .form-button.add:hover {
+            background-color: #3385ff;
+            color: white;
+        }
+
+        .form-button.back:hover {
+            background-color: black;
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+        }
+        
+        .question-list {
+            width: 50%; /* Adjust the width as needed */
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-right: 50px;
+            margin-left: 10px;
+            margin-top:10px;
+            padding: 20px;
+            height: fit-content;
+        }
+        
+        .question-list .question-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .empty-list-message {
+			width:50%;
+        text-align: center;
+        margin-top: 20px;
+        color: #888; /* Adjust the color as needed */
+    }
+
+    .question-item {
+        border: 1px solid white;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    </style>
+</head>
+<body>
+<div id="page-container">
+    <div class="form-container">
+        <h2>Add Question</h2>
+        <form id="question-form" th:method="post" th:action="@{/admin-page/addd}" th:object="${questionsForm}">
+            <div class="form-group">
+                <label class="form-label" for="questionTitle">Question:</label>
+                <input type="text" th:field="*{questionTitle}" class="form-input question" id="questionTitle" placeholder="Enter the question" name="questionTitle" required></input>
+            </div>
+            <div class "form-group">
+                <label class="form-label" for="option1"></label>
+                <input th:field="*{option1}" class="form-input" type="text" id="option1" placeholder="Option 1" name="option1" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="option2"></label>
+                <input th:field="*{option2}" class="form-input" type="text" id "option2" placeholder="Option 2" name="option2" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="option3"></label>
+                <input th:field="*{option3}" class="form-input" type="text" id="option3" placeholder="Option 3" name="option3" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="option4"></label>
+                <input th:field="*{option4}" class="form-input" type="text" id="option4" placeholder="Option 4" name="option4" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="rightAnswer"></label>
+                <input th:field="*{rightAnswer}" class="form-input" type="text" id="rightAnswer" name="rightAnswer" placeholder="Enter the correct answer" required>
+            </div>
+            <div class="form-button-container">
+                <a href="/admin-page/"><button class="form-button back" >Back</button></a>
+                <button class="form-button add" type="submit">Add Question</button>
+            </div>
+        </form>
+    </div>
+	<div class="question-list" th:if="${not #lists.isEmpty(allquestions)}">
+            <h2>Questions for [[${detail.getSection()}]] Section and Quiz Id : <span th:text="${category}"></span></h2>
+             <div th:each="question, questionIndex : ${allquestions}" class="question-item">
+        		<p th:text="'Question ' + ${questionIndex.index + 1} + ': ' + ${question.questionTitle}"></p>
+                <ol>
+                    <li th:text="${question.option1}"></li>
+                    <li th:text="${question.option2}"></li>
+                    <li th:text="${question.option3}"></li>
+                    <li th:text="${question.option4}"></li>
+                </ol>
+                <p th:text="'Correct Answer : '+${question.rightAnswer}"></p>
+                <!-- Display other question details as needed -->
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(allquestions)}" class="empty-list-message">
+    		<p>No questions added.</p>
+		</div>
+</div>
+
+</body>
+</html>

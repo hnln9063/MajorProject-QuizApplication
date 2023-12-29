@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+}
+* {
+    box-sizing: border-box;
+}
+.landing-page header {
+    min-height: 80px;
+    display: flex;
+}
+
+@media (max-width: 767px) {
+    .landing-page header {
+        min-height: auto;
+        display: initial;
+    }
+}
+
+.landing-page header .logo {
+    color: #5d5d5d;
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+@media (max-width: 767px) {
+    .landing-page header .logo {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+.landing-page header .links {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 767px) {
+    .landing-page header .links {
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+.landing-page header .links li {
+    margin-left: 30px;
+    color: #5d5d5d;
+    cursor: pointer;
+    transition: .3s;
+}
+
+@media (max-width: 767px) {
+    .landing-page header .links li {
+        margin-left: auto;
+    }
+}
+
+.landing-page header .links li:last-child {
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: #FFF;
+    background-color: #6c63ff;
+}
+/* Small */
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+.landing-page header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (max-width: 767px) {
+    .landing-page header .container {
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+/* Medium */
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+/* Large */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+.landing-page header .links li:last-child a {
+	color: #FFF;
+    text-decoration: none;
+}
+
+.landing-page header .links li:not(:last-child):hover {
+    color: #6c63ff;
+}
+        
+        .container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+        
+       .card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5em;
+            margin-bottom: 1em;
+            border-radius: 8px;
+        }
+
+        /* Add more styles and components for your dashboard here */
+    /* Style the form container */
+
+form {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    flex-direction: row;
+}
+
+/* Style labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Style select elements */
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+}
+
+/* Style the button */
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+        
+
+    </style>
+</head>
+<body>
+    <div class="landing-page">
+            <header>
+                <div class="container">
+                    <a th:href="@{/}" class="logo">GPREC <b>QUIZ APPLICATION</b></a>
+                    <ul class="links">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li><a th:href="@{/aboutus}">Aboutus</a></li>
+                        <li> <a th:href="@{/logout}">Logout</li></a>
+                    </ul>
+                </div>
+            </header>
+	</div>
+    <div class="container">
+    <div class="card">
+        <h2>Welcome, [[${user.getFullname()}]]</h2>
+        <p>This is your personalized dashboard.</p>
+       
+    </div>
+</div>
+	<div class="container" id="comp">
+		<div class="card">
+			<h3>Create Quiz</h3>
+			<form th:action="@{/admin-page/add}" method="get">
+				<label>Enter Quiz Id : </label>
+				<input type="text" name="category" required><br><br>
+				<button type="submit">CreateQuiz</button>
+			</form>
+			<!-- <a th:href="@{/admin-page/add}">Add Questions</a><br><br>  -->
+			
+		<!--	<a th:href="@{/admin-page/noticeboard}">Noticeboard</a>  -->
+		</div>
+	</div>
+	<div class="container" id="comp">
+		<div class="card">
+			<h3>Get Quiz Reports</h3>
+			<form th:action="@{/sheet/section/category}" method="get">
+			    <label for="section">Select Section:</label>
+			    <select id="section" name="section">
+			        <option value="A">A</option>
+			        <option value="B">B</option>
+			        <option value="C">C</option>
+			    </select>
+			    <br><br>
+			    <label for="category">Select Subject:</label>
+			    <select id="category" name="category">
+			        <option value="nsc">nsc</option>
+			        <option value="cc">cc</option>
+			        <option value="mwa">mwa</option>
+			        <option value="am">am</option>
+			        <option value="uhv">uhv</option>
+			        <option value="dl">dl</option>
+			    </select>
+			    <br><br>
+			    <button type="submit">Generate Report</button>
+			</form>
+			<a th:href="@{/admin-page/finalreport}">Get Your Section Results</a>
+</div>
+	</div>
+	 <div class="container" id="comp">
+        <div class="card">
+            <!-- Content for Noticeboard -->
+            <a th:href="@{/admin-page/noticeboard}">Noticeboard</a>
+        </div>
+    </div>
+	<div class="container" id="comp">
+        <div class="card">
+            <!-- Content for Get Your Section Results -->
+            <a th:href="@{/admin-page/finalreport}">Get Your Section Results</a>
+        </div>
+    </div>
+
+</body>
+</html>
