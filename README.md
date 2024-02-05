@@ -18,5 +18,5 @@ The solution we're aiming for involves creating a customized online quiz app tha
 
 **Contributors**
 - H N Lakshmi Narasimha | [GitHub](https://github.com/hnln9063) | [LinkedIn](https://www.linkedin.com/in/lakshmi-narasimha-hn/)
-- Kudala Bharani Kumar Reddy | [GitHub](https://github.com/kudala-bharani) | [LinkedIn]()
-- Telugu Durga Sai Pavan Kumar | [GitHub]() | [LinkedIn]()
+- Kudala Bharani Kumar Reddy | [GitHub](https://github.com/kudala-bharani) | [LinkedIn](www.linkedin.com/in/bharanikudala)
+- Telugu Durga Sai Pavan Kumar | [GitHub](https://github.com/dsp49) | [LinkedIn](https://www.linkedin.com/in/telugu-durga-sai-pavan-kumar-bab322250)
